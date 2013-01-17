@@ -16,5 +16,10 @@ namespace Scribble.Web.Controllers
         {
             return View(repository.Recent());
         }
+
+        public ViewResult Get(int year, int month, string urlTitle)
+        {
+            return View(repository.SinglePost(year, month, urlTitle));
+        }
     }
 }
