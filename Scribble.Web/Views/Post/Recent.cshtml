@@ -1,4 +1,4 @@
-﻿@model System.Collections.Generic.IList<Scribble.Web.Models.Post>
+﻿@model IList<Scribble.Web.Models.Post>
 
 @{
     Layout = null;
@@ -12,6 +12,11 @@
     </head>
     <body>
         <div>
+            @foreach (var post in Model)
+            {
+                <p>@post.UrlTitle</p>
+                <p>@post.Date</p>
+            }
         </div>
     </body>
 </html>
