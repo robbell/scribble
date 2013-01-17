@@ -10,10 +10,17 @@ namespace Scribble.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
+                name: "Root",
+                url: string.Empty,
+                defaults: new { controller = "Post", action = "Recent" }
+                );
+
+            routes.MapRoute(
+                name: "Post",
+                url: "{year}/{month}/{title}",
+                defaults: new { controller = "Post", action = "Get" },
+                constraints: new { year = @"\d{4}", month = @"\d{2}" }
+                );
         }
     }
 }
