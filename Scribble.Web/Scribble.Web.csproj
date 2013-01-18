@@ -20,6 +20,8 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -47,16 +49,20 @@
     </Reference>
     <Reference Include="Autofac.Integration.Mvc">
       <HintPath>..\packages\Autofac.Mvc4.2.6.2.859\lib\NET40\Autofac.Integration.Mvc.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Raven.Abstractions">
       <HintPath>..\packages\RavenDB.Client.2.0.2230\lib\net40\Raven.Abstractions.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Raven.Client.Embedded">
       <HintPath>..\packages\RavenDB.Embedded.2.0.2230\lib\net40\Raven.Client.Embedded.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Raven.Client.Lightweight">
       <HintPath>..\packages\RavenDB.Client.2.0.2230\lib\net40\Raven.Client.Lightweight.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Raven.Database">
       <HintPath>..\packages\RavenDB.Database.2.0.2230\lib\net40\Raven.Database.dll</HintPath>
@@ -155,6 +161,9 @@
   <ItemGroup>
     <Content Include="Views\Post\Get.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -184,6 +193,7 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
