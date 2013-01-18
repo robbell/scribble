@@ -5,7 +5,7 @@ using NUnit.Framework;
 using Scribble.Web.Controllers;
 using Scribble.Web.Models;
 
-namespace Scribble.Tests
+namespace Scribble.Tests.Controllers
 {
     [TestFixture]
     public class PostControllerTest
