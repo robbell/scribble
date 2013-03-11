@@ -14,7 +14,7 @@ namespace Scribble.Web
             var builder = new ContainerBuilder();
 
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
-            builder.RegisterType<ConcreteRepo>().As<IPostRepository>();
+            builder.RegisterType<PostRepository>().As<IPostRepository>();
 
             RegisterRavenDb(builder);
 

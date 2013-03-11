@@ -45,25 +45,22 @@ namespace Scribble.Tests.Controllers
         [Test]
         public void GetReturnsCorrectPostFromRepository()
         {
-            const int expectedYear = 2012;
-            const int expectedMonth = 1;
             const string expectedUrlTitle = "this-is-a-test";
-
+            var expectedDate = new DateTime(2012, 3, 1);
             var expectedPost = new Post
                 {
-                    Date = new DateTime(expectedYear, expectedMonth, 1),
+                    Date = expectedDate,
                     UrlTitle = expectedUrlTitle
                 };
 
-            repository.Setup(r => r.SinglePost(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>()))
+            repository.Setup(r => r.SinglePost(It.IsAny<string>(), It.IsAny<DateTime>()))
                       .Returns(expectedPost);
 
-            var result = (Post)controller.Get(expectedYear, expectedMonth, expectedUrlTitle).Model;
+            var result = (Post)controller.Get(expectedDate.Year, expectedDate.Month, expectedUrlTitle).Model;
 
-            Assert.That(result.Date.Year, Is.EqualTo(expectedYear));
-            Assert.That(result.Date.Month, Is.EqualTo(expectedMonth));
+            Assert.That(result.Date, Is.EqualTo(expectedDate));
             Assert.That(result.UrlTitle, Is.EqualTo(expectedUrlTitle));
-            repository.Verify(r => r.SinglePost(expectedYear, expectedMonth, expectedUrlTitle));
+            repository.Verify(r => r.SinglePost(expectedUrlTitle, expectedDate));
         }
     }
 }

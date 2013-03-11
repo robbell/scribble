@@ -139,6 +139,7 @@
     <Compile Include="App_Start\IocConfig.cs" />
     <Compile Include="Models\IPostRepository.cs" />
     <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\PostRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

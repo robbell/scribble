@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using Scribble.Web.Models;
 
 namespace Scribble.Web.Controllers
@@ -19,7 +20,7 @@ namespace Scribble.Web.Controllers
 
         public ViewResult Get(int year, int month, string urlTitle)
         {
-            return View(repository.SinglePost(year, month, urlTitle));
+            return View(repository.SinglePost(urlTitle, new DateTime(year, month, 1)));
         }
     }
 }
