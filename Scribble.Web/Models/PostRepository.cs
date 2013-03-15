@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Raven.Client;
+using Raven.Client.Linq;
 
 namespace Scribble.Web.Models
 {
@@ -16,7 +17,7 @@ namespace Scribble.Web.Models
 
         public IList<Post> Recent()
         {
-            throw new System.NotImplementedException();
+            return session.Query<Post>().OrderByDescending(p => p.Date).ToList();
         }
 
         public Post SinglePost(string urlTitle, DateTime date)
