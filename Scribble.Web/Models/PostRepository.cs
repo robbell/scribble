@@ -21,7 +21,7 @@ namespace Scribble.Web.Models
 
         public Post SinglePost(string urlTitle, DateTime date)
         {
-            return session.Query<Post>().First(p => p.UrlTitle == urlTitle && p.Date == date);
+            return session.Query<Post>().FirstOrDefault(p => p.UrlTitle == urlTitle && p.Date == date);
         }
     }
 }

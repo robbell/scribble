@@ -25,20 +25,13 @@ namespace Scribble.Web
 
         private static void RegisterRavenDb(ContainerBuilder builder)
         {
-            builder.Register(c =>
-            {
-                var documentStore = new EmbeddableDocumentStore();
-                documentStore.DataDirectory = "Data";
-                documentStore.Initialize();
-
-                return documentStore;
-            })
-            .As<IDocumentStore>()
-                .SingleInstance();
+            builder.Register(c => new EmbeddableDocumentStore { DataDirectory = "ScribbleData" }.Initialize())
+                   .As<IDocumentStore>()
+                   .SingleInstance();
 
             builder.Register(c => c.Resolve<IDocumentStore>().OpenSession())
-                .As<IDocumentSession>()
-                .InstancePerHttpRequest();
+                   .As<IDocumentSession>()
+                   .InstancePerHttpRequest();
         }
     }
 }
