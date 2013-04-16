@@ -7,13 +7,30 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <title>@Model.UrlTitle</title>
-    </head>
-    <body>
-        <div>
-            <p>@Model.UrlTitle</p>
-            <p>@Model.Date</p>
-        </div>
-    </body>
+<head>
+    <title>@Model.Title</title>
+</head>
+<body>
+    <h1>@Model.UrlTitle</h1>
+
+    @Model.Body
+
+    <h2>Tags</h2>
+
+    <ul>
+        @foreach (var tag in Model.Tags)
+        {
+            <li>@tag.Name</li>
+        }
+    </ul>
+
+    <h2>Categories</h2>
+    
+    <ul>
+        @foreach (var category in Model.Categories)
+        {
+            <li>@category.Name</li>
+        }
+    </ul>
+</body>
 </html>

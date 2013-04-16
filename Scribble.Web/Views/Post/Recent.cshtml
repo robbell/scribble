@@ -7,16 +7,16 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <title>title</title>
-    </head>
-    <body>
-        <div>
-            @foreach (var post in Model)
-            {
-                <p>@post.UrlTitle</p>
-                <p>@post.Date</p>
-            }
-        </div>
-    </body>
+<head>
+    <title>title</title>
+</head>
+<body>
+    <dl>
+        @foreach (var post in Model)
+        {
+            <dt>@post.Title</dt>
+            <dd>@post.Date</dd>
+        }
+    </dl>
+</body>
 </html>
