@@ -14,7 +14,7 @@
 <body>
     <h1>@Model.UrlTitle</h1>
 
-    @Model.Body
+    @Html.Raw(Model.Body)
 
     <h2>Tags</h2>
 
@@ -39,10 +39,12 @@
     @foreach (var comment in Model.Comments)
     {
         <div>
-            @using (Html.WrapWithLink(comment.Website))
-            {
-                <h3>@comment.Name</h3>
-            }
+            <h3>
+                @using (Html.WrapWithLink(comment.Website))
+                {
+                    @comment.Name
+                }
+            </h3>
             <p>@comment.Body</p>
         </div>
     }
