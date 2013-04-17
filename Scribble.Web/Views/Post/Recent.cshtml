@@ -11,12 +11,15 @@
     <title>title</title>
 </head>
 <body>
-    <dl>
-        @foreach (var post in Model)
-        {
-            <dt>@post.Title</dt>
-            <dd>@post.Date</dd>
-        }
-    </dl>
+    @foreach (var post in Model)
+    {
+        <div>
+            <h2>
+                @Html.ActionLink(post.Title, "Get", new { year = post.Date.Year, month = post.Date.Month.ToString("00"), urlTitle = post.UrlTitle })
+            </h2>
+
+            @Html.Raw(post.Body)
+        </div>
+    }
 </body>
 </html>
