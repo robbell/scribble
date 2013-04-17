@@ -12,5 +12,12 @@ namespace Scribble.Web.Models
         public IList<Comment> Comments { get; set; }
         public IEnumerable<Tag> Tags { get; set; }
         public IEnumerable<Category> Categories { get; set; }
+
+        public Post()
+        {
+            Comments = new List<Comment>();
+            Tags = new List<Tag>();
+            Categories = new List<Category>();
+        }
     }
 }
