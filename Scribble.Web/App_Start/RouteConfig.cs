@@ -18,7 +18,7 @@ namespace Scribble.Web
             routes.MapRoute(
                 name: "Post",
                 url: "{year}/{month}/{urlTitle}",
-                defaults: new { controller = "Post", action = "Get" },
+                defaults: new { controller = "Post", action = "Single" },
                 constraints: new { year = @"\d{4}", month = @"\d{2}" }
                 );
         }

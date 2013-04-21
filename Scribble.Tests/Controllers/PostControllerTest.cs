@@ -56,7 +56,7 @@ namespace Scribble.Tests.Controllers
             repository.Setup(r => r.SinglePost(It.IsAny<string>(), It.IsAny<DateTime>()))
                       .Returns(expectedPost);
 
-            var result = (Post)controller.Get(expectedDate.Year, expectedDate.Month, expectedUrlTitle).Model;
+            var result = (Post)controller.Single(expectedDate.Year, expectedDate.Month, expectedUrlTitle).Model;
 
             Assert.That(result.Date, Is.EqualTo(expectedDate));
             Assert.That(result.UrlTitle, Is.EqualTo(expectedUrlTitle));

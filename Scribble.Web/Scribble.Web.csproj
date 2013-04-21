@@ -165,7 +165,7 @@
     <Content Include="Views\Post\Recent.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Post\Get.cshtml" />
+    <Content Include="Views\Post\Single.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
