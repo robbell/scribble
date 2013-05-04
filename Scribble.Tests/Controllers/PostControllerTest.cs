@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Moq;
 using NUnit.Framework;
 using Scribble.Web.Controllers;
@@ -45,22 +44,23 @@ namespace Scribble.Tests.Controllers
         [Test]
         public void GetReturnsCorrectPostFromRepository()
         {
-            const string expectedUrlTitle = "this-is-a-test";
-            var expectedDate = new DateTime(2012, 3, 1);
+            const int year = 2013;
+            const int month = 4;
+            const string title = "this-is-a-test";
+            const string expectedUrl = "2013/04/this-is-a-test";
+
             var expectedPost = new Post
                 {
-                    Date = expectedDate,
-                    UrlTitle = expectedUrlTitle
+                    Url = expectedUrl
                 };
 
-            repository.Setup(r => r.SinglePost(It.IsAny<string>(), It.IsAny<DateTime>()))
+            repository.Setup(r => r.SinglePost(expectedUrl))
                       .Returns(expectedPost);
 
-            var result = (Post)controller.Single(expectedDate.Year, expectedDate.Month, expectedUrlTitle).Model;
+            var result = (Post)controller.Single(year, month, title).Model;
 
-            Assert.That(result.Date, Is.EqualTo(expectedDate));
-            Assert.That(result.UrlTitle, Is.EqualTo(expectedUrlTitle));
-            repository.Verify(r => r.SinglePost(expectedUrlTitle, expectedDate));
+            repository.Verify(r => r.SinglePost(expectedUrl));
+            Assert.That(result, Is.EqualTo(expectedPost));
         }
     }
 }

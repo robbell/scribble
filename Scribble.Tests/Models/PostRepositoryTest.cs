@@ -12,21 +12,19 @@ namespace Scribble.Tests.Models
         [Test]
         public void ReturnsCorrectSinglePostFromRavenDb()
         {
-            const string expectedUrlTitle = "a-post-title";
-            var expectedDate = new DateTime(2001, 02, 01);
+            const string url = "a-post-url";
             var expectedPost = new Post
                 {
-                    UrlTitle = expectedUrlTitle,
-                    Date = expectedDate
+                    Url = url,
                 };
 
-            var session = WithSessionContainingPosts(new Post { UrlTitle = "not-the-correct-post" },
+            var session = WithSessionContainingPosts(new Post { Url = "not-the-correct-post" },
                                                      expectedPost,
-                                                     new Post { UrlTitle = "also-not-the-correct-post" });
+                                                     new Post { Url = "also-not-the-correct-post" });
 
             var repository = new PostRepository(session);
 
-            var post = repository.SinglePost(expectedUrlTitle, expectedDate);
+            var post = repository.SinglePost(url);
 
             Assert.That(post, Is.EqualTo(expectedPost));
         }

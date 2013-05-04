@@ -68,6 +68,7 @@
     <Compile Include="Helpers\LinkWrapperTest.cs" />
     <Compile Include="Helpers\OptionalLinkHelperTest.cs" />
     <Compile Include="Models\PostRepositoryTest.cs" />
+    <Compile Include="Models\PostTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

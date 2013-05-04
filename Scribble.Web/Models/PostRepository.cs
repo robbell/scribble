@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Raven.Client;
 using Raven.Client.Linq;
@@ -20,9 +19,9 @@ namespace Scribble.Web.Models
             return session.Query<Post>().OrderByDescending(p => p.Date).ToList();
         }
 
-        public Post SinglePost(string urlTitle, DateTime date)
+        public Post SinglePost(string url)
         {
-            return session.Query<Post>().FirstOrDefault(p => p.UrlTitle == urlTitle && p.Date == date);
+            return session.Query<Post>().FirstOrDefault(p => p.Url == url);
         }
     }
 }
