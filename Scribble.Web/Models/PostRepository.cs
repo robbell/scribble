@@ -14,14 +14,19 @@ namespace Scribble.Web.Models
             this.session = session;
         }
 
+        public Post SinglePost(string url)
+        {
+            return session.Query<Post>().FirstOrDefault(p => p.Url == url);
+        }
+
         public IList<Post> Recent()
         {
             return session.Query<Post>().OrderByDescending(p => p.Date).ToList();
         }
 
-        public Post SinglePost(string url)
+        public IList<Post> ByTag(Tag tag)
         {
-            return session.Query<Post>().FirstOrDefault(p => p.Url == url);
+            return session.Query<Post>().Where(p => p.Tags.Any(t => t.UrlName == tag.UrlName)).ToList();
         }
     }
 }

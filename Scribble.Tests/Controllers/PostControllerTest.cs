@@ -11,6 +11,7 @@ namespace Scribble.Tests.Controllers
     {
         private Mock<IPostRepository> repository;
         private PostController controller;
+        private List<Post> samplePosts = new List<Post> { new Post(), new Post() };
 
         [SetUp]
         public void SetUp()
@@ -30,15 +31,27 @@ namespace Scribble.Tests.Controllers
         [Test]
         public void RecentActionGetsRecentPostsFromRepository()
         {
-            var expectedPosts = new List<Post> { new Post(), new Post() };
-
             repository.Setup(r => r.Recent())
-                      .Returns(expectedPosts);
+                      .Returns(samplePosts);
 
             var result = controller.Recent().Model;
 
-            Assert.That(result, Is.EqualTo(expectedPosts));
+            Assert.That(result, Is.EqualTo(samplePosts));
             repository.Verify(r => r.Recent());
+        }
+
+        [Test]
+        public void ByTagGetsPostsWithTagFromRepository()
+        {
+            var expectedTag = new Tag { Name = "Expected Tag" };
+
+            repository.Setup(r => r.ByTag(expectedTag))
+                      .Returns(samplePosts);
+
+            var result = controller.ByTag(expectedTag).Model;
+
+            Assert.That(result, Is.EqualTo(samplePosts));
+            repository.Verify(r => r.ByTag(expectedTag));
         }
 
         [Test]

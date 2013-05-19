@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 using Raven.Client;
 using Raven.Client.Embedded;
 using Scribble.Web.Models;
+using System.Linq;
 
 namespace Scribble.Tests.Models
 {
@@ -44,6 +46,27 @@ namespace Scribble.Tests.Models
             Assert.That(recentPosts[0], Is.EqualTo(newestPost));
             Assert.That(recentPosts[1], Is.EqualTo(secondNewestPost));
             Assert.That(recentPosts[2], Is.EqualTo(thirdNewestPost));
+        }
+
+        [Test]
+        public void ByTagReturnsAllPostsContainingTag()
+        {
+            var expectedTag = new Tag { UrlName = "Expected Tag" };
+            var otherTag = new Tag { UrlName = "Other Tag" };
+
+            var session = WithSessionContainingPosts(
+                new Post { Title = "Expected", Tags = new List<Tag> { expectedTag, otherTag } },
+                new Post { Title = "Expected", Tags = new List<Tag> { expectedTag } },
+                new Post { Title = "Not Expected", Tags = new List<Tag> { otherTag } },
+                new Post { Title = "Not Expected" });
+
+            var postRepository = new PostRepository(session);
+
+            var all = postRepository.Recent();
+
+            var result = postRepository.ByTag(expectedTag);
+
+            Assert.That(result.All(p => p.Title == "Expected"));
         }
 
         private static IDocumentSession WithSessionContainingPosts(params Post[] posts)

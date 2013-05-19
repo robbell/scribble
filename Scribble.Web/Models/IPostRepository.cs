@@ -4,7 +4,8 @@ namespace Scribble.Web.Models
 {
     public interface IPostRepository
     {
-        IList<Post> Recent();
         Post SinglePost(string url);
+        IList<Post> Recent();
+        IList<Post> ByTag(Tag tag);
     }
 }

@@ -23,5 +23,10 @@ namespace Scribble.Web.Controllers
 
             return View(repository.SinglePost(url));
         }
+
+        public ViewResult ByTag(Tag tag)
+        {
+            return View(repository.ByTag(tag));
+        }
     }
 }
