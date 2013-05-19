@@ -12,7 +12,7 @@ namespace Scribble.Web.Models
         public DateTime Date { get; set; }
         public IList<Comment> Comments { get; set; }
         public IEnumerable<Tag> Tags { get; set; }
-        public IEnumerable<Category> Categories { get; set; }
+        public Category Category { get; set; }
 
         public string UrlTitle
         {
@@ -23,7 +23,6 @@ namespace Scribble.Web.Models
         {
             Comments = new List<Comment>();
             Tags = new List<Tag>();
-            Categories = new List<Category>();
         }
     }
 }

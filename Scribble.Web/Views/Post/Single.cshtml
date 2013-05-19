@@ -25,14 +25,9 @@
         }
     </ul>
 
-    <h2>Categories</h2>
+    <h2>Category</h2>
 
-    <ul>
-        @foreach (var category in Model.Categories)
-        {
-            <li>@category.Name</li>
-        }
-    </ul>
+    <p>@Model.Category.Name</p>
 
     <h2>Comments</h2>
 
