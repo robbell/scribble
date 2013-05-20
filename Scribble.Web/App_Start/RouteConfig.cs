@@ -21,6 +21,12 @@ namespace Scribble.Web
                 defaults: new { controller = "Post", action = "Single" },
                 constraints: new { year = @"\d{4}", month = @"\d{2}" }
                 );
+
+            routes.MapRoute(
+                name: "ByTag",
+                url: "tags/{urlName}",
+                defaults: new { controller = "Post", action = "ByTag" }
+                );
         }
     }
 }

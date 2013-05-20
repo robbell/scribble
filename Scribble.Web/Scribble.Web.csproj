@@ -171,6 +171,7 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Views\Post\ByTag.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
