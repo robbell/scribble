@@ -16,7 +16,7 @@ namespace Scribble.Web.Models
 
         public string UrlTitle
         {
-            get { return Url.Split('/').Last(); }
+            get { return Url != null ? Url.Split('/').Last() : string.Empty; }
         }
 
         public Post()

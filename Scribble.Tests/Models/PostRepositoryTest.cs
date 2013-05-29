@@ -51,22 +51,40 @@ namespace Scribble.Tests.Models
         [Test]
         public void ByTagReturnsAllPostsContainingTag()
         {
+            const string expectedTitle = "Expected";
             var expectedTag = new Tag { UrlName = "Expected Tag" };
             var otherTag = new Tag { UrlName = "Other Tag" };
 
             var session = WithSessionContainingPosts(
-                new Post { Title = "Expected", Tags = new List<Tag> { expectedTag, otherTag } },
-                new Post { Title = "Expected", Tags = new List<Tag> { expectedTag } },
+                new Post { Title = expectedTitle, Tags = new List<Tag> { expectedTag, otherTag } },
+                new Post { Title = expectedTitle, Tags = new List<Tag> { expectedTag } },
                 new Post { Title = "Not Expected", Tags = new List<Tag> { otherTag } },
                 new Post { Title = "Not Expected" });
 
             var postRepository = new PostRepository(session);
 
-            var all = postRepository.Recent();
-
             var result = postRepository.ByTag(expectedTag);
 
-            Assert.That(result.All(p => p.Title == "Expected"));
+            Assert.That(result.All(p => p.Title == expectedTitle));
+        }
+
+        [Test]
+        public void ByCategoryReturnsAllPostsContainingCategory()
+        {
+            const string expectedTitle = "Expected";
+            var expectedCategory = new Category { UrlName = "Expected Category" };
+            var otherCategory = new Category { UrlName = "Other Category" };
+
+            var session = WithSessionContainingPosts(
+                new Post { Title = expectedTitle, Category = expectedCategory },
+                new Post { Title = "Not Expected", Category = otherCategory },
+                new Post { Title = "Not Expected" });
+
+            var postRepository = new PostRepository(session);
+
+            var result = postRepository.ByCategory(expectedCategory);
+
+            Assert.That(result.All(p => p.Title == expectedTitle));
         }
 
         private static IDocumentSession WithSessionContainingPosts(params Post[] posts)

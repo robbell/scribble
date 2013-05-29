@@ -12,5 +12,12 @@ namespace Scribble.Tests.Models
             var post = new Post { Url = "2012/03/expected-title" };
             Assert.That(post.UrlTitle, Is.EqualTo("expected-title"));
         }
+
+        [Test]
+        public void EmptyUrlReturnsEmptyUrlTitle()
+        {
+            var post = new Post { Url = string.Empty };
+            Assert.That(post.UrlTitle, Is.Empty);
+        }
     }
 }

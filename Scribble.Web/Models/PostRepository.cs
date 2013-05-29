@@ -28,5 +28,10 @@ namespace Scribble.Web.Models
         {
             return session.Query<Post>().Where(p => p.Tags.Any(t => t.UrlName == tag.UrlName)).ToList();
         }
+
+        public IList<Post> ByCategory(Category category)
+        {
+            return session.Query<Post>().Where(p => p.Category.UrlName == category.UrlName).ToList();
+        }
     }
 }

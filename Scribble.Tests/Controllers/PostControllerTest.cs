@@ -55,6 +55,20 @@ namespace Scribble.Tests.Controllers
         }
 
         [Test]
+        public void ByCategoryGetsPostsInCategoryFromRepository()
+        {
+            var expectedCategory = new Category { Name = "Expected Category" };
+
+            repository.Setup(r => r.ByCategory(expectedCategory))
+                      .Returns(samplePosts);
+
+            var result = controller.ByCategory(expectedCategory).Model;
+
+            Assert.That(result, Is.EqualTo(samplePosts));
+            repository.Verify(r => r.ByCategory(expectedCategory));
+        }
+
+        [Test]
         public void GetReturnsCorrectPostFromRepository()
         {
             const int year = 2013;
