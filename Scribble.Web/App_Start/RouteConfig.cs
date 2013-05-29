@@ -27,6 +27,12 @@ namespace Scribble.Web
                 url: "tags/{urlName}",
                 defaults: new { controller = "Post", action = "ByTag" }
                 );
+            
+            routes.MapRoute(
+                name: "ByCategory",
+                url: "categories/{urlName}",
+                defaults: new { controller = "Post", action = "ByCategory" }
+                );
         }
     }
 }
