@@ -21,13 +21,13 @@
     <ul>
         @foreach (var tag in Model.Tags)
         {
-            <li>@tag.Name</li>
+            <li>@Html.ActionLink(tag.Name, "ByTag", new { UrlName = tag.UrlName })</li>
         }
     </ul>
 
     <h2>Category</h2>
 
-    <p>@Model.Category.Name</p>
+    <p>@Html.ActionLink(Model.Category.Name, "ByCategory", new { UrlName = Model.Category.UrlName })</p>
 
     <h2>Comments</h2>
 
