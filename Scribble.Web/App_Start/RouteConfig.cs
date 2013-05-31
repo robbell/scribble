@@ -12,26 +12,30 @@ namespace Scribble.Web
             routes.MapRoute(
                 name: "Root",
                 url: string.Empty,
-                defaults: new { controller = "Post", action = "Recent" }
+                defaults: new { controller = "Post", action = "Recent" },
+                namespaces: new[] { "Scribble.Web.Controllers" }
                 );
 
             routes.MapRoute(
                 name: "Post",
                 url: "{year}/{month}/{urlTitle}",
                 defaults: new { controller = "Post", action = "Single" },
-                constraints: new { year = @"\d{4}", month = @"\d{2}" }
+                constraints: new { year = @"\d{4}", month = @"\d{2}" },
+                namespaces: new[] { "Scribble.Web.Controllers" }
                 );
 
             routes.MapRoute(
                 name: "ByTag",
                 url: "tags/{urlName}",
-                defaults: new { controller = "Post", action = "ByTag" }
+                defaults: new { controller = "Post", action = "ByTag" },
+                namespaces: new[] { "Scribble.Web.Controllers" }
                 );
-            
+
             routes.MapRoute(
                 name: "ByCategory",
                 url: "categories/{urlName}",
-                defaults: new { controller = "Post", action = "ByCategory" }
+                defaults: new { controller = "Post", action = "ByCategory" },
+                namespaces: new[] { "Scribble.Web.Controllers" }
                 );
         }
     }
