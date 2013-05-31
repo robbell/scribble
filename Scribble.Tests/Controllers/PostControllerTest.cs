@@ -21,14 +21,6 @@ namespace Scribble.Tests.Controllers
         }
 
         [Test]
-        public void RecentIsDefaultAction()
-        {
-            var result = controller.Recent();
-
-            Assert.That(result.ViewName, Is.EqualTo(string.Empty));
-        }
-
-        [Test]
         public void RecentActionGetsRecentPostsFromRepository()
         {
             repository.Setup(r => r.Recent())

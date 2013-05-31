@@ -1,0 +1,50 @@
+﻿@model Scribble.Web.Models.Post
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+
+    <fieldset>
+        <legend>Post</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Url)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Url)
+            @Html.ValidationMessageFor(model => model.Url)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Title)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Body)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Body)
+            @Html.ValidationMessageFor(model => model.Body)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Date)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Date)
+            @Html.ValidationMessageFor(model => model.Date)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
