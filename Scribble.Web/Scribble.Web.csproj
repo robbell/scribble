@@ -132,6 +132,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\Authoring\AuthoringAreaRegistration.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -168,13 +169,18 @@
     <Content Include="Views\Post\Single.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Authoring\Views\Web.config" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
     <Content Include="Views\Post\ByTag.cshtml" />
     <Content Include="Views\Post\ByCategory.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Areas\Authoring\Controllers\" />
+    <Folder Include="Areas\Authoring\Models\" />
+    <Folder Include="Areas\Authoring\Views\Shared\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
