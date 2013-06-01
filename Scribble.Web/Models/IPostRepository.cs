@@ -8,5 +8,6 @@ namespace Scribble.Web.Models
         IList<Post> Recent();
         IList<Post> ByTag(Tag tag);
         IList<Post> ByCategory(Category category);
+        void Save(Post post);
     }
 }

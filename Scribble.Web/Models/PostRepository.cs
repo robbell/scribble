@@ -33,5 +33,11 @@ namespace Scribble.Web.Models
         {
             return session.Query<Post>().Where(p => p.Category.UrlName == category.UrlName).ToList();
         }
+
+        public void Save(Post post)
+        {
+            session.Store(post);
+            session.SaveChanges();
+        }
     }
 }

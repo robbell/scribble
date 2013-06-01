@@ -61,9 +61,9 @@ namespace Scribble.Tests.Models
                 new Post { Title = "Not Expected", Tags = new List<Tag> { otherTag } },
                 new Post { Title = "Not Expected" });
 
-            var postRepository = new PostRepository(session);
+            var repository = new PostRepository(session);
 
-            var result = postRepository.ByTag(expectedTag);
+            var result = repository.ByTag(expectedTag);
 
             Assert.That(result.All(p => p.Title == expectedTitle));
         }
@@ -80,17 +80,30 @@ namespace Scribble.Tests.Models
                 new Post { Title = "Not Expected", Category = otherCategory },
                 new Post { Title = "Not Expected" });
 
-            var postRepository = new PostRepository(session);
+            var repository = new PostRepository(session);
 
-            var result = postRepository.ByCategory(expectedCategory);
+            var result = repository.ByCategory(expectedCategory);
 
             Assert.That(result.All(p => p.Title == expectedTitle));
         }
 
+        [Test]
+        public void SavePersistsPost()
+        {
+            const string expectedUrl = "1984/07/some-post";
+            var post = new Post { Url = expectedUrl };
+
+            var session = WithEmptySession();
+            var repository = new PostRepository(session);
+
+            repository.Save(post);
+
+            Assert.That(session.Query<Post>().Count(p => p.Url == expectedUrl), Is.EqualTo(1));
+        }
+
         private static IDocumentSession WithSessionContainingPosts(params Post[] posts)
         {
-            var store = new EmbeddableDocumentStore { RunInMemory = true }.Initialize();
-            var session = store.OpenSession();
+            var session = WithEmptySession();
 
             foreach (var post in posts)
             {
@@ -99,6 +112,12 @@ namespace Scribble.Tests.Models
 
             session.SaveChanges();
             return session;
+        }
+
+        private static IDocumentSession WithEmptySession()
+        {
+            var store = new EmbeddableDocumentStore { RunInMemory = true }.Initialize();
+            return store.OpenSession();
         }
     }
 }
