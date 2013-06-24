@@ -20,6 +20,8 @@ namespace Scribble.Web.Areas.Authoring.Controllers
         [HttpPost]
         public ActionResult Create(Post post)
         {
+            if (!ModelState.IsValid) return View(post);
+
             repository.Save(post);
 
             return RedirectToAction("Create");

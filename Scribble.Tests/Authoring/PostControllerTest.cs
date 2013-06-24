@@ -28,14 +28,25 @@ namespace Scribble.Tests.Authoring
         }
 
         [Test]
-        public void CreatePostSavesValidPostToRepository()
+        public void CreateSavesValidPostToRepository()
         {
             var post = new Post { Body = "Body Text", Title = "A Title" };
 
-            var response = controller.Create(post) as RedirectToRouteResult;
+            var response = (RedirectToRouteResult)controller.Create(post);
 
             repository.Verify(r => r.Save(post));
             Assert.That(response.RouteValues["action"], Is.EqualTo("Create"));
+        }
+
+        [Test]
+        public void CreateReturnsInvalidPostWithModelErrors()
+        {
+            var incompletePost = new Post();
+            controller.ModelState.AddModelError("", "mock error message");
+
+            var response = (ViewResult)controller.Create(incompletePost);
+
+            Assert.That(response.ViewData.ModelState.IsValid, Is.False);
         }
     }
 }
