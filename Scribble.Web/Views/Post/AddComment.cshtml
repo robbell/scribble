@@ -1,0 +1,46 @@
+﻿@model Scribble.Web.ViewModels.PostViewModel
+
+@using (Html.BeginForm("Single", "Post"))
+{
+    <fieldset>
+        <legend>Add Comment</legend>
+
+        <div>
+            @Html.LabelFor(m => m.UserComment.Name)
+        </div>
+        <div>
+            @Html.EditorFor(m => m.UserComment.Name)
+            @Html.ValidationMessageFor(m => m.UserComment.Name)
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.UserComment.Email)
+        </div>
+        <div>
+            @Html.EditorFor(m => m.UserComment.Email)
+            @Html.ValidationMessageFor(m => m.UserComment.Email)
+        </div>
+        
+        <div>
+            @Html.LabelFor(m => m.UserComment.Website)
+        </div>
+        <div>
+            @Html.EditorFor(m => m.UserComment.Website)
+            @Html.ValidationMessageFor(m => m.UserComment.Website)
+        </div>
+        
+        <div>
+            @Html.LabelFor(m => m.UserComment.Body)
+        </div>
+        <div>
+            @Html.EditorFor(m => m.UserComment.Body)
+            @Html.ValidationMessageFor(m => m.UserComment.Body)
+        </div>
+        
+        @Html.HiddenFor(m => m.Post.Url)
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}

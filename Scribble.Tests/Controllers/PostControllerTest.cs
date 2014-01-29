@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using Moq;
 using NUnit.Framework;
 using Scribble.Web.Controllers;
 using Scribble.Web.Entities;
 using Scribble.Web.Repositories;
+using Scribble.Web.ViewModels;
 
 namespace Scribble.Tests.Controllers
 {
@@ -81,6 +83,49 @@ namespace Scribble.Tests.Controllers
 
             repository.Verify(r => r.SinglePost(expectedUrl));
             Assert.That(result, Is.EqualTo(expectedPost));
+        }
+
+        [Test]
+        public void AddCommentGetsPostFromRepositoryAndSavesComment()
+        {
+            var model = new PostViewModel
+                {
+                    UserComment = new Comment
+                        {
+                            Name = "Mr Man",
+                            Email = "person@example.com",
+                            Website = "http://rob-bell.net",
+                            Body = "A comment."
+                        },
+                    Post = new Post { Url = "2011/02/some-post" }
+                };
+
+            var returnedPost = new Post();
+            repository.Setup(r => r.SinglePost(model.Post.Url)).Returns(returnedPost);
+
+            controller.AddComment(model);
+
+            Assert.That(returnedPost.Comments, Contains.Item(model.UserComment));
+            repository.Verify(r => r.Save(model.Post));
+        }
+
+        [Test]
+        public void CreateReturnsInvalidPostWithModelErrors()
+        {
+            var incompleteComment = new PostViewModel
+            {
+                UserComment = new Comment
+                {
+                    Name = "Mr Man"
+                },
+                Post = new Post { Url = "2011/02/some-post" }
+            };
+
+            controller.ModelState.AddModelError("", "mock error message");
+
+            var response = (ViewResult)controller.AddComment(incompleteComment);
+
+            Assert.That(response.ViewData.ModelState.IsValid, Is.False);
         }
     }
 }

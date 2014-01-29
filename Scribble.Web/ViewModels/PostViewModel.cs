@@ -2,7 +2,7 @@
 
 namespace Scribble.Web.ViewModels
 {
-    public class ViewPageViewModel
+    public class PostViewModel
     {
         public Post Post { get; set; }
         public Comment UserComment { get; set; }

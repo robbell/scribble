@@ -148,7 +148,7 @@
     <Compile Include="Repositories\PostRepository.cs" />
     <Compile Include="Entities\Tag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\ViewPageViewModel.cs" />
+    <Compile Include="ViewModels\PostViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -182,6 +182,7 @@
     </None>
     <Content Include="Views\Post\ByTag.cshtml" />
     <Content Include="Views\Post\ByCategory.cshtml" />
+    <Content Include="Views\Post\AddComment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Authoring\Views\Shared\" />

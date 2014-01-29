@@ -1,25 +1,26 @@
 ﻿@using Scribble.Web.Helpers
-@model Scribble.Web.Entities.Post
+@model Scribble.Web.ViewModels.PostViewModel
 
 @{
     Layout = null;
+    var post = Model.Post;
 }
 
 <!DOCTYPE html>
 
 <html>
 <head>
-    <title>@Model.Title</title>
+    <title>@post.Title</title>
 </head>
 <body>
-    <h1>@Model.Title</h1>
+    <h1>@post.Title</h1>
 
-    @Html.Raw(Model.Body)
+    @Html.Raw(post.Body)
 
     <h2>Tags</h2>
 
     <ul>
-        @foreach (var tag in Model.Tags)
+        @foreach (var tag in post.Tags)
         {
             <li>@Html.ActionLink(tag.Name, "ByTag", new { tag.UrlName })</li>
         }
@@ -27,11 +28,11 @@
 
     <h2>Category</h2>
 
-    <p>@Html.ActionLink(Model.Category.Name, "ByCategory", new { Model.Category.UrlName })</p>
+    <p>@Html.ActionLink(post.Category.Name, "ByCategory", new { post.Category.UrlName })</p>
 
     <h2>Comments</h2>
 
-    @foreach (var comment in Model.Comments)
+    @foreach (var comment in post.Comments)
     {
         <div>
             <h3>
@@ -43,5 +44,7 @@
             <p>@comment.Body</p>
         </div>
     }
+    
+    @Html.Partial("AddComment", Model)
 </body>
 </html>
