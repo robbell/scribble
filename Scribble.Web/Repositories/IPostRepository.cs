@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using Scribble.Web.Entities;
 
-namespace Scribble.Web.Models
+namespace Scribble.Web.Repositories
 {
     public interface IPostRepository
     {

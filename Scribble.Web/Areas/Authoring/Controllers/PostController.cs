@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
-using Scribble.Web.Models;
+using Scribble.Web.Entities;
+using Scribble.Web.Repositories;
 
 namespace Scribble.Web.Areas.Authoring.Controllers
 {

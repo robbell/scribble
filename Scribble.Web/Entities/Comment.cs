@@ -1,4 +1,4 @@
-﻿namespace Scribble.Web.Models
+﻿namespace Scribble.Web.Entities
 {
     public class Comment
     {

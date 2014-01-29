@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Scribble.Web.Models
+namespace Scribble.Web.Entities
 {
     public class Post
     {

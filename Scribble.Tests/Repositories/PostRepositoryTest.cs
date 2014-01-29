@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using Raven.Client;
 using Raven.Client.Embedded;
-using Scribble.Web.Models;
+using Scribble.Web.Entities;
 using System.Linq;
+using Scribble.Web.Repositories;
 
-namespace Scribble.Tests.Models
+namespace Scribble.Tests.Repositories
 {
     [TestFixture]
     public class PostRepositoryTest

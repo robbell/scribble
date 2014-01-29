@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
-using Scribble.Web.Models;
+using Scribble.Web.Entities;
 
-namespace Scribble.Tests.Models
+namespace Scribble.Tests.Entities
 {
     [TestFixture]
     public class PostTest

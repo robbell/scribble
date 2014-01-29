@@ -1,5 +1,5 @@
 ﻿@using Scribble.Web.Helpers
-@model Scribble.Web.Models.Post
+@model Scribble.Web.Entities.Post
 
 @{
     Layout = null;
@@ -21,13 +21,13 @@
     <ul>
         @foreach (var tag in Model.Tags)
         {
-            <li>@Html.ActionLink(tag.Name, "ByTag", new { UrlName = tag.UrlName })</li>
+            <li>@Html.ActionLink(tag.Name, "ByTag", new { tag.UrlName })</li>
         }
     </ul>
 
     <h2>Category</h2>
 
-    <p>@Html.ActionLink(Model.Category.Name, "ByCategory", new { UrlName = Model.Category.UrlName })</p>
+    <p>@Html.ActionLink(Model.Category.Name, "ByCategory", new { Model.Category.UrlName })</p>
 
     <h2>Comments</h2>
 

@@ -3,7 +3,7 @@ using Autofac;
 using Autofac.Integration.Mvc;
 using Raven.Client;
 using Raven.Client.Embedded;
-using Scribble.Web.Models;
+using Scribble.Web.Repositories;
 
 namespace Scribble.Web
 {
@@ -18,14 +18,21 @@ namespace Scribble.Web
 
             RegisterRavenDb(builder);
 
-            var container = builder.Build();
-
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(builder.Build()));
         }
 
         private static void RegisterRavenDb(ContainerBuilder builder)
         {
-            builder.Register(c => new EmbeddableDocumentStore { DataDirectory = "ScribbleData" }.Initialize())
+            var documentStore = new EmbeddableDocumentStore
+            {
+                UseEmbeddedHttpServer = true,
+                DataDirectory = "ScribbleData"
+            };
+
+            documentStore.Configuration.Port = 12013;
+
+            builder.Register(c =>
+                             documentStore.Initialize())
                    .As<IDocumentStore>()
                    .SingleInstance();
 

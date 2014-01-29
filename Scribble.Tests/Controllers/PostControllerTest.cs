@@ -2,7 +2,8 @@
 using Moq;
 using NUnit.Framework;
 using Scribble.Web.Controllers;
-using Scribble.Web.Models;
+using Scribble.Web.Entities;
+using Scribble.Web.Repositories;
 
 namespace Scribble.Tests.Controllers
 {
@@ -11,7 +12,7 @@ namespace Scribble.Tests.Controllers
     {
         private Mock<IPostRepository> repository;
         private PostController controller;
-        private List<Post> samplePosts = new List<Post> { new Post(), new Post() };
+        private readonly List<Post> samplePosts = new List<Post> { new Post(), new Post() };
 
         [SetUp]
         public void SetUp()

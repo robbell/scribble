@@ -2,7 +2,8 @@
 using Moq;
 using NUnit.Framework;
 using Scribble.Web.Areas.Authoring.Controllers;
-using Scribble.Web.Models;
+using Scribble.Web.Entities;
+using Scribble.Web.Repositories;
 
 namespace Scribble.Tests.Authoring
 {

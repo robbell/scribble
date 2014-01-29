@@ -2,8 +2,9 @@
 using System.Linq;
 using Raven.Client;
 using Raven.Client.Linq;
+using Scribble.Web.Entities;
 
-namespace Scribble.Web.Models
+namespace Scribble.Web.Repositories
 {
     public class PostRepository : IPostRepository
     {
