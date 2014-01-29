@@ -1,0 +1,8 @@
+- [ ] Tests for results returned by controllers
+- [ ] Edit a post
+- [ ] Add/edit/delete categories/tags
+- [ ] Comment approval
+- [ ] Pages with fixed URLs
+- [ ] Contact form
+- [ ] Theming
+- [ ] URL path routing - not very nice
