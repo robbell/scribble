@@ -1,3 +1,4 @@
+- [ ] Blog details on each page (base VM?)
 - [ ] Tests for results returned by controllers
 - [ ] Edit a post
 - [ ] Add/edit/delete categories/tags
@@ -6,3 +7,5 @@
 - [ ] Contact form
 - [ ] Theming
 - [ ] URL path routing - not very nice
+- [ ] Route testing
+- [ ] Comment dates
