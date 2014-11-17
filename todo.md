@@ -1,4 +1,4 @@
-- [ ] Blog details on each page (base VM?)
+- [ ] Blog details on each page (base VM? See http://blog.bitdiff.com/2012/05/sharing-common-view-model-data-in.html)
 - [ ] Tests for results returned by controllers
 - [ ] Edit a post
 - [ ] Add/edit/delete categories/tags
