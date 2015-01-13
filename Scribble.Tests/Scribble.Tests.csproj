@@ -65,6 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\BlogModelAttributeTest.cs" />
     <Compile Include="Authoring\PostControllerTest.cs" />
     <Compile Include="Controllers\PostControllerTest.cs" />
     <Compile Include="Helpers\LinkWrapperTest.cs" />
