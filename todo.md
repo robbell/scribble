@@ -9,3 +9,4 @@
 - [ ] URL path routing - not very nice
 - [ ] Route testing
 - [ ] Comment dates
+- [ ] Replace all entity usage in views with view models
