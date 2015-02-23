@@ -1,16 +1,20 @@
-﻿using System.Web.Mvc;
+﻿using AutoMapper;
+using Scribble.Web.Areas.Authoring.ViewModels;
 using Scribble.Web.Entities;
 using Scribble.Web.Repositories;
+using System.Web.Mvc;
 
 namespace Scribble.Web.Areas.Authoring.Controllers
 {
     public class PostController : Controller
     {
         private readonly IPostRepository repository;
+        private readonly IMappingEngine mapper;
 
-        public PostController(IPostRepository repository)
+        public PostController(IPostRepository repository, IMappingEngine mapper)
         {
             this.repository = repository;
+            this.mapper = mapper;
         }
 
         public ViewResult Create()
@@ -19,11 +23,13 @@ namespace Scribble.Web.Areas.Authoring.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Post post)
+        public ActionResult Create(CreatePostViewModel viewModel)
         {
-            if (!ModelState.IsValid) return View(post);
+            if (!ModelState.IsValid) return View(viewModel);
 
-            repository.Save(post);
+            var entity = mapper.Map<Post>(viewModel);
+
+            repository.Save(entity);
 
             return RedirectToAction("Create");
         }

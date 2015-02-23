@@ -1,4 +1,4 @@
-﻿@model Scribble.Web.Entities.Post
+﻿@model Scribble.Web.Areas.Authoring.ViewModels.CreatePostViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -12,11 +12,11 @@
         <legend>Post</legend>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Url)
+            @Html.LabelFor(model => model.UrlTitle)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Url)
-            @Html.ValidationMessageFor(model => model.Url)
+            @Html.EditorFor(model => model.UrlTitle)
+            @Html.ValidationMessageFor(model => model.UrlTitle)
         </div>
 
         <div class="editor-label">

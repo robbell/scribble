@@ -1,23 +1,27 @@
-﻿using System.Web.Mvc;
+﻿using AutoMapper;
 using Moq;
 using NUnit.Framework;
 using Scribble.Web.Areas.Authoring.Controllers;
+using Scribble.Web.Areas.Authoring.ViewModels;
 using Scribble.Web.Entities;
 using Scribble.Web.Repositories;
+using System.Web.Mvc;
 
 namespace Scribble.Tests.Authoring
 {
     [TestFixture]
     public class PostControllerTest
     {
-        private Mock<IPostRepository> repository;
         private PostController controller;
+        private IMappingEngine mapper;
+        private IPostRepository repository;
 
         [SetUp]
         public void SetUp()
         {
-            repository = new Mock<IPostRepository>();
-            controller = new PostController(repository.Object);
+            repository = Mock.Of<IPostRepository>();
+            mapper = Mock.Of<IMappingEngine>();
+            controller = new PostController(repository, mapper);
         }
 
         [Test]
@@ -31,18 +35,22 @@ namespace Scribble.Tests.Authoring
         [Test]
         public void CreateSavesValidPostToRepository()
         {
-            var post = new Post { Body = "Body Text", Title = "A Title" };
+            var viewModel = new CreatePostViewModel();
+            var entity = new Post();
 
-            var response = (RedirectToRouteResult)controller.Create(post);
+            Mock.Get(mapper).Setup(m => m.Map<Post>(It.IsAny<CreatePostViewModel>())).Returns(entity);
 
-            repository.Verify(r => r.Save(post));
+            var response = (RedirectToRouteResult)controller.Create(viewModel);
+
+            Mock.Get(mapper).Verify(m => m.Map<Post>(viewModel));
+            Mock.Get(repository).Verify(r => r.Save(entity));
             Assert.That(response.RouteValues["action"], Is.EqualTo("Create"));
         }
 
         [Test]
         public void CreateReturnsInvalidPostWithModelErrors()
         {
-            var incompletePost = new Post();
+            var incompletePost = new CreatePostViewModel();
             controller.ModelState.AddModelError("", "mock error message");
 
             var response = (ViewResult)controller.Create(incompletePost);

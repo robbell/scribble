@@ -51,6 +51,12 @@
       <HintPath>..\packages\Autofac.Mvc4.2.6.2.859\lib\NET40\Autofac.Integration.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Raven.Abstractions">
       <HintPath>..\packages\RavenDB.Client.2.0.2230\lib\net40\Raven.Abstractions.dll</HintPath>
@@ -134,6 +140,7 @@
   <ItemGroup>
     <Compile Include="Areas\Authoring\AuthoringAreaRegistration.cs" />
     <Compile Include="Areas\Authoring\Controllers\PostController.cs" />
+    <Compile Include="Areas\Authoring\ViewModels\CreatePostViewModel.cs" />
     <Compile Include="Attributes\BlogModelAttribute.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Domain\IBlogInfoProvider.cs" />
@@ -221,6 +228,7 @@
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
