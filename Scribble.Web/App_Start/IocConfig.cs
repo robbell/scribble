@@ -1,9 +1,12 @@
 ﻿using System.Web.Mvc;
 using Autofac;
 using Autofac.Integration.Mvc;
+using AutoMapper;
 using Raven.Client;
 using Raven.Client.Embedded;
+using Scribble.Web.Entities;
 using Scribble.Web.Repositories;
+using Scribble.Web.ViewModels;
 
 namespace Scribble.Web
 {
@@ -17,8 +20,18 @@ namespace Scribble.Web
             builder.RegisterType<PostRepository>().As<IPostRepository>();
 
             RegisterRavenDb(builder);
+            RegisterMapper(builder);
 
             DependencyResolver.SetResolver(new AutofacDependencyResolver(builder.Build()));
+        }
+
+        private static void RegisterMapper(ContainerBuilder builder)
+        {
+            Mapper.CreateMap<CreatePostViewModel, Post>();
+            Mapper.CreateMap<Post, PostViewModel>();
+            Mapper.CreateMap<Post, PostSummaryViewModel>();
+
+            builder.Register(context => Mapper.Engine).As<IMappingEngine>();
         }
 
         private static void RegisterRavenDb(ContainerBuilder builder)

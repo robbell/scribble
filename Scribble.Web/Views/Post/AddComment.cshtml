@@ -3,41 +3,39 @@
 @using (Html.BeginForm("Single", "Post"))
 {
     <fieldset>
-        <legend>Add Comment</legend>
+        <legend>Add Text</legend>
 
         <div>
-            @Html.LabelFor(m => m.UserComment.Name)
+            @Html.LabelFor(m => m.CommenterName)
         </div>
         <div>
-            @Html.EditorFor(m => m.UserComment.Name)
-            @Html.ValidationMessageFor(m => m.UserComment.Name)
+            @Html.EditorFor(m => m.CommenterName)
+            @Html.ValidationMessageFor(m => m.CommenterName)
         </div>
 
         <div>
-            @Html.LabelFor(m => m.UserComment.Email)
+            @Html.LabelFor(m => m.CommenterEmail)
         </div>
         <div>
-            @Html.EditorFor(m => m.UserComment.Email)
-            @Html.ValidationMessageFor(m => m.UserComment.Email)
+            @Html.EditorFor(m => m.CommenterEmail)
+            @Html.ValidationMessageFor(m => m.CommenterEmail)
         </div>
         
         <div>
-            @Html.LabelFor(m => m.UserComment.Website)
+            @Html.LabelFor(m => m.CommenterWebsite)
         </div>
         <div>
-            @Html.EditorFor(m => m.UserComment.Website)
-            @Html.ValidationMessageFor(m => m.UserComment.Website)
+            @Html.EditorFor(m => m.CommenterWebsite)
+            @Html.ValidationMessageFor(m => m.CommenterWebsite)
         </div>
         
         <div>
-            @Html.LabelFor(m => m.UserComment.Body)
+            @Html.LabelFor(m => m.Comment)
         </div>
         <div>
-            @Html.EditorFor(m => m.UserComment.Body)
-            @Html.ValidationMessageFor(m => m.UserComment.Body)
+            @Html.EditorFor(m => m.Comment)
+            @Html.ValidationMessageFor(m => m.Comment)
         </div>
-        
-        @Html.HiddenFor(m => m.Post.Url)
 
         <p>
             <input type="submit" value="Create" />
