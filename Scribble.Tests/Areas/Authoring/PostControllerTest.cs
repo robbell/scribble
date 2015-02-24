@@ -1,11 +1,11 @@
-﻿using System.Web.Mvc;
-using AutoMapper;
+﻿using AutoMapper;
 using Moq;
 using NUnit.Framework;
 using Scribble.Web.Areas.Authoring.Controllers;
+using Scribble.Web.Areas.Authoring.ViewModels;
 using Scribble.Web.Entities;
 using Scribble.Web.Repositories;
-using Scribble.Web.ViewModels;
+using System.Web.Mvc;
 
 namespace Scribble.Tests.Areas.Authoring
 {
@@ -13,8 +13,8 @@ namespace Scribble.Tests.Areas.Authoring
     public class PostControllerTest
     {
         private PostController controller;
-        private IPostRepository repository;
         private IMappingEngine mapper;
+        private IPostRepository repository;
 
         [SetUp]
         public void SetUp()
@@ -35,18 +35,14 @@ namespace Scribble.Tests.Areas.Authoring
         [Test]
         public void CreateSavesValidPostToRepository()
         {
-            // Arrange
             var model = new CreatePostViewModel();
             var entity = new Post();
 
-            Mock.Get(mapper)
-                .Setup(m => m.Map<CreatePostViewModel, Post>(It.IsAny<CreatePostViewModel>()))
-                .Returns(entity);
+            Mock.Get(mapper).Setup(m => m.Map<Post>(It.IsAny<CreatePostViewModel>())).Returns(entity);
 
-            // Act
             var response = (RedirectToRouteResult)controller.Create(model);
 
-            // Assert
+            Mock.Get(mapper).Verify(m => m.Map<Post>(model));
             Mock.Get(repository).Verify(r => r.Save(entity));
             Assert.That(response.RouteValues["action"], Is.EqualTo("Create"));
         }

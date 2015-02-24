@@ -4,6 +4,7 @@ using Autofac.Integration.Mvc;
 using AutoMapper;
 using Raven.Client;
 using Raven.Client.Embedded;
+using Scribble.Web.Areas.Authoring.ViewModels;
 using Scribble.Web.Entities;
 using Scribble.Web.Repositories;
 using Scribble.Web.ViewModels;

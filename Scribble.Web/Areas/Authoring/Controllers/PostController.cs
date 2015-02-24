@@ -1,8 +1,8 @@
-﻿using System.Web.Mvc;
-using AutoMapper;
+﻿using AutoMapper;
+using Scribble.Web.Areas.Authoring.ViewModels;
 using Scribble.Web.Entities;
 using Scribble.Web.Repositories;
-using Scribble.Web.ViewModels;
+using System.Web.Mvc;
 
 namespace Scribble.Web.Areas.Authoring.Controllers
 {
@@ -27,7 +27,7 @@ namespace Scribble.Web.Areas.Authoring.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            var entity = mapper.Map<CreatePostViewModel, Post>(model);
+            var entity = mapper.Map<Post>(model);
 
             repository.Save(entity);
 
