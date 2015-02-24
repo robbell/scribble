@@ -119,7 +119,7 @@ namespace Scribble.Tests.Controllers
             Assert.NotNull(result);
             Assert.That(result.RouteValues["action"], Is.EqualTo("Single"));
             Assert.That(result.RouteValues["year"], Is.EqualTo(2010));
-            Assert.That(result.RouteValues["month"], Is.EqualTo(4));
+            Assert.That(result.RouteValues["month"], Is.EqualTo("04"));
             Assert.That(result.RouteValues["urlTitle"], Is.EqualTo("my-post"));
             Mock.Get(repository).Verify(r => r.Save(returnedPost));
         }
