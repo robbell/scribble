@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using System.Web.Routing;
 using AutoMapper;
 using Scribble.Web.Entities;
 using Scribble.Web.Repositories;
@@ -39,11 +40,9 @@ namespace Scribble.Web.Controllers
             return View(MapEntitiesToSummaries(posts));
         }
 
-        public ViewResult Single(int year, int month, string urlTitle)
+        public ViewResult Single(PostUrlViewModel postUrl)
         {
-            var url = string.Format("{0}/{1:00}/{2}", year, month, urlTitle);
-
-            var entity = repository.SinglePost(url);
+            var entity = repository.SinglePost(postUrl.Url);
 
             var model = mapper.Map<Post, PostViewModel>(entity);
 
@@ -51,13 +50,11 @@ namespace Scribble.Web.Controllers
         }
 
         [HttpPost, ActionName("Single")]
-        public ActionResult AddComment(int year, int month, string urlTitle, PostViewModel model)
+        public ActionResult AddComment(PostUrlViewModel postUrl, PostViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
 
-            var url = string.Format("{0}/{1:00}/{2}", year, month, urlTitle);
-
-            var post = repository.SinglePost(url);
+            var post = repository.SinglePost(postUrl.Url);
 
             post.Comments.Add(new Comment
             {
@@ -69,7 +66,7 @@ namespace Scribble.Web.Controllers
 
             repository.Save(post);
 
-            return RedirectToAction("Single", new { year, month = month.ToString("00"), urlTitle });
+            return RedirectToAction("Single");
         }
 
         private IList<PostSummaryViewModel> MapEntitiesToSummaries(IList<Post> entities)

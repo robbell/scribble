@@ -160,6 +160,7 @@
     <Compile Include="Domain\BlogInfo.cs" />
     <Compile Include="ViewModels\BlogViewModel.cs" />
     <Compile Include="ViewModels\PostSummaryViewModel.cs" />
+    <Compile Include="ViewModels\PostUrlViewModel.cs" />
     <Compile Include="ViewModels\PostViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

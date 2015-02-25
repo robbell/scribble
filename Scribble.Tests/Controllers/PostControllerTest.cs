@@ -75,7 +75,7 @@ namespace Scribble.Tests.Controllers
         [Test]
         public void GetReturnsCorrectPostFromRepository()
         {
-            const string expectedUrl = "2013/04/this-is-a-test";
+            var postUrl = new PostUrlViewModel { Year = 2013, Month = 4, UrlTitle = "a-test" };
             var post = new Post();
             var expectedModel = new PostViewModel();
 
@@ -87,19 +87,19 @@ namespace Scribble.Tests.Controllers
                 .Setup(m => m.Map<Post, PostViewModel>(post))
                 .Returns(expectedModel);
 
-            var result = (PostViewModel)controller.Single(2013, 4, "this-is-a-test").Model;
+            var result = (PostViewModel)controller.Single(postUrl).Model;
 
-            Mock.Get(repository).Verify(r => r.SinglePost(expectedUrl));
+            Mock.Get(repository).Verify(r => r.SinglePost(postUrl.Url));
             Assert.That(result, Is.EqualTo(expectedModel));
         }
 
         [Test]
         public void AddCommentSavesCommentToPostRepositoryAndRedirects()
         {
-            const string expectedUrl = "2010/04/my-post";
+            var postUrl = new PostUrlViewModel {Year = 2013, Month = 4, UrlTitle = "a-test"};
             var returnedPost = new Post();
 
-            Mock.Get(repository).Setup(r => r.SinglePost(expectedUrl)).Returns(returnedPost);
+            Mock.Get(repository).Setup(r => r.SinglePost(postUrl.Url)).Returns(returnedPost);
 
             var model = new PostViewModel
             {
@@ -109,7 +109,7 @@ namespace Scribble.Tests.Controllers
                 Comment = "A comment"
             };
 
-            var result = controller.AddComment(2010, 4, "my-post", model) as RedirectToRouteResult;
+            var result = controller.AddComment(postUrl, model) as RedirectToRouteResult;
 
             Assert.That(returnedPost.Comments,
                 Has.Exactly(1).Matches<Comment>(c => c.Text == model.Comment
@@ -118,20 +118,18 @@ namespace Scribble.Tests.Controllers
                                                      && c.Website == model.CommenterWebsite));
             Assert.NotNull(result);
             Assert.That(result.RouteValues["action"], Is.EqualTo("Single"));
-            Assert.That(result.RouteValues["year"], Is.EqualTo(2010));
-            Assert.That(result.RouteValues["month"], Is.EqualTo("04"));
-            Assert.That(result.RouteValues["urlTitle"], Is.EqualTo("my-post"));
             Mock.Get(repository).Verify(r => r.Save(returnedPost));
         }
 
         [Test]
         public void CreateReturnsInvalidPostWithModelErrors()
         {
+            var postUrl = new PostUrlViewModel { Year = 2013, Month = 4, UrlTitle = "a-test" };
             var incompleteComment = new PostViewModel();
 
             controller.ModelState.AddModelError("", "mock error message");
 
-            var response = (ViewResult)controller.AddComment(2010, 4, "my-post", incompleteComment);
+            var response = (ViewResult)controller.AddComment(postUrl, incompleteComment);
 
             Assert.That(response.ViewData.ModelState.IsValid, Is.False);
         }
