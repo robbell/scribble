@@ -12,7 +12,8 @@
 
 ##General
 - [ ] Tests for results returned by controllers
-- [ ] URL path routing - not very nice
+- [x] URL path routing - not very nice
 - [ ] Route testing
 - [ ] Comment dates
-- [ ] Replace all entity usage in views with view models
+- [ ] Replace all entity usage in views with view models (some VM properties remain)
+- [ ] Update MVC version
