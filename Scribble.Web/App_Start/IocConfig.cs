@@ -3,7 +3,7 @@ using Autofac;
 using Autofac.Integration.Mvc;
 using AutoMapper;
 using Raven.Client;
-using Raven.Client.Embedded;
+using Raven.Client.Document;
 using Scribble.Web.Areas.Authoring.ViewModels;
 using Scribble.Web.Entities;
 using Scribble.Web.Repositories;
@@ -37,22 +37,19 @@ namespace Scribble.Web
 
         private static void RegisterRavenDb(ContainerBuilder builder)
         {
-            var documentStore = new EmbeddableDocumentStore
+            var documentStore = new DocumentStore
             {
-                UseEmbeddedHttpServer = true,
-                DataDirectory = "ScribbleData"
+                ConnectionStringName = "ScribbleData"
             };
 
-            documentStore.Configuration.Port = 12013;
-
             builder.Register(c =>
-                             documentStore.Initialize())
-                   .As<IDocumentStore>()
-                   .SingleInstance();
+                documentStore.Initialize())
+                .As<IDocumentStore>()
+                .SingleInstance();
 
             builder.Register(c => c.Resolve<IDocumentStore>().OpenSession())
-                   .As<IDocumentSession>()
-                   .InstancePerHttpRequest();
+                .As<IDocumentSession>()
+                .InstancePerHttpRequest();
         }
     }
 }
