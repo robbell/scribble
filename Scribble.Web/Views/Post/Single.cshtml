@@ -1,17 +1,6 @@
 ﻿@using Scribble.Web.Helpers
 @model Scribble.Web.ViewModels.PostViewModel
 
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title>@Model.Title</title>
-</head>
-<body>
     <h1>@Model.Title</h1>
 
     @Html.Raw(Model.Body)
@@ -45,5 +34,3 @@
     }
     
 @Html.Partial("AddComment", Model)
-</body>
-</html>

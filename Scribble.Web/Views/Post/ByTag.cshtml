@@ -1,25 +1,12 @@
 ﻿@model IList<Scribble.Web.ViewModels.PostSummaryViewModel>
 
-@{
-    Layout = null;
+@foreach (var post in Model)
+{
+    <div>
+        <h2>
+            @Html.ActionLink(post.Title, "Single", new { year = post.Date.Year, month = post.Date.Month.ToString("00"), urlTitle = post.UrlTitle })
+        </h2>
+
+        @Html.Raw(post.Body)
+    </div>
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title>title</title>
-</head>
-<body>
-    @foreach (var post in Model)
-    {
-        <div>
-            <h2>
-                @Html.ActionLink(post.Title, "Single", new { year = post.Date.Year, month = post.Date.Month.ToString("00"), urlTitle = post.UrlTitle })
-            </h2>
-
-            @Html.Raw(post.Body)
-        </div>
-    }
-</body>
-</html>
