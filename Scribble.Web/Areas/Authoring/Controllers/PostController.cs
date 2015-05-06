@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Scribble.Web.Areas.Authoring.Controllers
 {
+    [Authorize]
     public class PostController : Controller
     {
         private readonly IPostRepository repository;
