@@ -7,6 +7,6 @@
             @Html.ActionLink(post.Title, "Single", new { year = post.Date.Year, month = post.Date.Month.ToString("00"), urlTitle = post.UrlTitle })
         </h2>
 
-        @Html.Raw(post.Teaser)
+        @Html.Raw(post.Teaser) @Html.ActionLink("Continue reading...", "Single", new { year = post.Date.Year, month = post.Date.Month.ToString("00"), urlTitle = post.UrlTitle })
     </div>
 }
