@@ -39,9 +39,11 @@ namespace Scribble.Web.Controllers
             return View(MapEntitiesToSummaries(posts));
         }
 
-        public ViewResult Single(PostUrlViewModel postUrl)
+        public ActionResult Single(PostUrlViewModel postUrl)
         {
             var entity = repository.SinglePost(postUrl.Url);
+
+            if (entity == null) return HttpNotFound();
 
             var model = mapper.Map<Post, PostViewModel>(entity);
 

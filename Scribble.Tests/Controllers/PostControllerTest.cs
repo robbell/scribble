@@ -87,16 +87,32 @@ namespace Scribble.Tests.Controllers
                 .Setup(m => m.Map<Post, PostViewModel>(post))
                 .Returns(expectedModel);
 
-            var result = (PostViewModel)controller.Single(postUrl).Model;
+            var result = (ViewResult)controller.Single(postUrl);
+            var model = (PostViewModel)result.Model;
 
             Mock.Get(repository).Verify(r => r.SinglePost(postUrl.Url));
-            Assert.That(result, Is.EqualTo(expectedModel));
+            Assert.That(model, Is.EqualTo(expectedModel));
+        }
+
+        [Test]
+        public void NonExistentPostUrlReturns404()
+        {
+            var badUrl = new PostUrlViewModel { Year = 2012, Month = 3, UrlTitle = "doesnt-exist" };
+
+            Mock.Get(repository)
+                .Setup(r => r.SinglePost(It.IsAny<string>()))
+                .Returns((Post)null);
+
+            var result = controller.Single(badUrl);
+
+            Mock.Get(repository).Verify(r => r.SinglePost(badUrl.Url));
+            Assert.That(result, Is.InstanceOf<HttpNotFoundResult>());
         }
 
         [Test]
         public void AddCommentSavesCommentToPostRepositoryAndRedirects()
         {
-            var postUrl = new PostUrlViewModel {Year = 2013, Month = 4, UrlTitle = "a-test"};
+            var postUrl = new PostUrlViewModel { Year = 2013, Month = 4, UrlTitle = "a-test" };
             var returnedPost = new Post();
 
             Mock.Get(repository).Setup(r => r.SinglePost(postUrl.Url)).Returns(returnedPost);
