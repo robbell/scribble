@@ -8,5 +8,6 @@ namespace Scribble.Web.ViewModels
         public DateTime Date { get; set; }
         public string UrlTitle { get; set; }
         public string Body { get; set; }
+        public string Teaser { get; set; }
     }
 }
