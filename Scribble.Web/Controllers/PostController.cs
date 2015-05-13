@@ -45,7 +45,7 @@ namespace Scribble.Web.Controllers
 
             if (entity == null) return HttpNotFound();
 
-            var model = mapper.Map<Post, PostViewModel>(entity);
+            var model = mapper.Map<PostViewModel>(entity);
 
             return View(model);
         }
@@ -72,7 +72,7 @@ namespace Scribble.Web.Controllers
 
         private IList<PostSummaryViewModel> MapEntitiesToSummaries(IList<Post> entities)
         {
-            return mapper.Map<IList<Post>, IList<PostSummaryViewModel>>(entities);
+            return mapper.Map<IList<PostSummaryViewModel>>(entities);
         }
     }
 }

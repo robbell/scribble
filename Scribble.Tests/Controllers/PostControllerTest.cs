@@ -27,7 +27,7 @@ namespace Scribble.Tests.Controllers
             controller = new PostController(repository, mapper);
 
             Mock.Get(mapper)
-                .Setup(m => m.Map<IList<Post>, IList<PostSummaryViewModel>>(sampleEntities))
+                .Setup(m => m.Map<IList<PostSummaryViewModel>>(sampleEntities))
                 .Returns(sampleSummaries);
         }
 
@@ -84,7 +84,7 @@ namespace Scribble.Tests.Controllers
                 .Returns(post);
 
             Mock.Get(mapper)
-                .Setup(m => m.Map<Post, PostViewModel>(post))
+                .Setup(m => m.Map<PostViewModel>(post))
                 .Returns(expectedModel);
 
             var result = (ViewResult)controller.Single(postUrl);
