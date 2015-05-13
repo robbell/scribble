@@ -31,10 +31,6 @@ namespace Scribble.Tests.Controllers
             var page = new Page();
             var expectedModel = new PageViewModel();
 
-            var repository = Mock.Of<IPageRepository>();
-            var mapper = Mock.Of<IMappingEngine>();
-            var controller = new PageController(repository, mapper);
-
             Mock.Get(repository).Setup(r => r.SinglePage(It.IsAny<string>())).Returns(page);
             Mock.Get(mapper).Setup(m => m.Map<PageViewModel>(page)).Returns(expectedModel);
 
@@ -42,13 +38,13 @@ namespace Scribble.Tests.Controllers
 
             Assert.IsNotNull(result);
             Assert.That(result.Model, Is.EqualTo(expectedModel));
-            Mock.Get(repository).Verify(r => r.SinglePage(urlModel.Url));
+            Mock.Get(repository).Verify(r => r.SinglePage(urlModel.UrlTitle));
         }
 
         [Test]
         public void NonExistentPageUrlReturns404()
         {
-            var badUrl = new PageUrlViewModel { Url = "doesnt-exist" };
+            var badUrl = new PageUrlViewModel { UrlTitle = "doesnt-exist" };
 
             Mock.Get(repository)
                 .Setup(r => r.SinglePage(It.IsAny<string>()))
@@ -56,7 +52,7 @@ namespace Scribble.Tests.Controllers
 
             var result = controller.Single(badUrl);
 
-            Mock.Get(repository).Verify(r => r.SinglePage(badUrl.Url));
+            Mock.Get(repository).Verify(r => r.SinglePage(badUrl.UrlTitle));
             Assert.That(result, Is.InstanceOf<HttpNotFoundResult>());
         }
     }
