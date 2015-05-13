@@ -19,6 +19,7 @@ namespace Scribble.Web
 
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             builder.RegisterType<PostRepository>().As<IPostRepository>();
+            builder.RegisterType<PageRepository>().As<IPageRepository>();
 
             RegisterRavenDb(builder);
             RegisterMapper(builder);
@@ -31,6 +32,7 @@ namespace Scribble.Web
             Mapper.CreateMap<CreatePostViewModel, Post>();
             Mapper.CreateMap<Post, PostViewModel>();
             Mapper.CreateMap<Post, PostSummaryViewModel>();
+            Mapper.CreateMap<Page, PageViewModel>();
 
             builder.Register(context => Mapper.Engine).As<IMappingEngine>();
         }

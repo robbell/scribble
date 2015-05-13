@@ -37,6 +37,13 @@ namespace Scribble.Web
                 defaults: new { controller = "Post", action = "ByCategory" },
                 namespaces: new[] { "Scribble.Web.Controllers" }
                 );
+
+            routes.MapRoute(
+                name: "Page",
+                url: "{urlTitle}",
+                defaults: new { controller = "Page", action = "Single" },
+                namespaces: new[] { "Scribble.Web.Controllers" }
+                );
         }
     }
 }

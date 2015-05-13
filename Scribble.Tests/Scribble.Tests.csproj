@@ -73,9 +73,11 @@
   <ItemGroup>
     <Compile Include="Attributes\BlogModelAttributeTest.cs" />
     <Compile Include="Areas\Authoring\PostControllerTest.cs" />
+    <Compile Include="Controllers\PageControllerTest.cs" />
     <Compile Include="Controllers\PostControllerTest.cs" />
     <Compile Include="Helpers\LinkWrapperTest.cs" />
     <Compile Include="Helpers\OptionalLinkHelperTest.cs" />
+    <Compile Include="Repositories\PageRepositoryTest.cs" />
     <Compile Include="Repositories\PostRepositoryTest.cs" />
     <Compile Include="Entities\PostTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
