@@ -22,17 +22,22 @@ namespace Scribble.Web.Repositories
 
         public IList<Post> Recent()
         {
-            return session.Query<Post>().OrderByDescending(p => p.Date).ToList();
+            return OrderByDateDescending(session.Query<Post>()).ToList();
         }
 
         public IList<Post> ByTag(Tag tag)
         {
-            return session.Query<Post>().Where(p => p.Tags.Any(t => t.UrlName == tag.UrlName)).ToList();
+            return OrderByDateDescending(session.Query<Post>().Where(p => p.Tags.Any(t => t.UrlName == tag.UrlName))).ToList();
         }
 
         public IList<Post> ByCategory(Category category)
         {
-            return session.Query<Post>().Where(p => p.Category.UrlName == category.UrlName).ToList();
+            return OrderByDateDescending(session.Query<Post>().Where(p => p.Category.UrlName == category.UrlName)).ToList();
+        }
+
+        private IEnumerable<Post> OrderByDateDescending(IRavenQueryable<Post> query)
+        {
+            return query.OrderByDescending(p => p.Date);
         }
 
         public void Save(Post post)
