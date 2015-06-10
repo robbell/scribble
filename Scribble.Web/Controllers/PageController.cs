@@ -5,6 +5,7 @@ using Scribble.Web.ViewModels;
 
 namespace Scribble.Web.Controllers
 {
+    [OutputCache(CacheProfile = "Standard")]
     public class PageController : Controller
     {
         private readonly IPageRepository repository;

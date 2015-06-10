@@ -7,6 +7,7 @@ using Scribble.Web.ViewModels;
 
 namespace Scribble.Web.Controllers
 {
+    [OutputCache(CacheProfile = "Standard")]
     public class PostController : Controller
     {
         private readonly IPostRepository repository;
