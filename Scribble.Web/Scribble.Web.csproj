@@ -53,6 +53,10 @@
       <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -151,22 +155,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Content Include="apple-touch-icon.png" />
-    <Content Include="browserconfig.xml" />
-    <Content Include="css\main.css" />
-    <Content Include="css\normalize.css" />
-    <Content Include="css\normalize.min.css" />
-    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="img\comment-left-bg.png" />
     <Content Include="img\comment-right-bg.png" />
     <Content Include="img\site-name-2x.png" />
     <Content Include="img\site-name.png" />
-    <Content Include="js\main.js" />
-    <Content Include="js\vendor\jquery-1.11.2.min.js" />
-    <Content Include="js\vendor\modernizr-2.8.3-respond-1.4.2.min.js" />
-    <Content Include="tile-wide.png" />
-    <Content Include="tile.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -198,9 +191,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Page\Single.cshtml" />
-    <Content Include="Raven.Studio.Html5.zip">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Authoring\Views\Shared\" />
