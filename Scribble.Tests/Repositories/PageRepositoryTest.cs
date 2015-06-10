@@ -1,13 +1,12 @@
 ﻿using NUnit.Framework;
 using Raven.Client;
-using Raven.Client.Embedded;
 using Scribble.Web.Entities;
 using Scribble.Web.Repositories;
 
 namespace Scribble.Tests.Repositories
 {
     [TestFixture]
-    public class PageRepositoryTest
+    public class PageRepositoryTest : RepositoryTestBase
     {
         [Test]
         public void ReturnsCorrectSinglePageFromRavenDb()
@@ -39,12 +38,6 @@ namespace Scribble.Tests.Repositories
             session.SaveChanges();
 
             return session;
-        }
-
-        private static IDocumentSession WithEmptySession()
-        {
-            var store = new EmbeddableDocumentStore { RunInMemory = true }.Initialize();
-            return store.OpenSession();
         }
     }
 }

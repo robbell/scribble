@@ -10,7 +10,7 @@ using Scribble.Web.Repositories;
 namespace Scribble.Tests.Repositories
 {
     [TestFixture]
-    public class PostRepositoryTest
+    public class PostRepositoryTest : RepositoryTestBase
     {
         [Test]
         public void ReturnsCorrectSinglePostFromRavenDb()
@@ -113,12 +113,6 @@ namespace Scribble.Tests.Repositories
 
             session.SaveChanges();
             return session;
-        }
-
-        private static IDocumentSession WithEmptySession()
-        {
-            var store = new EmbeddableDocumentStore { RunInMemory = true }.Initialize();
-            return store.OpenSession();
         }
     }
 }

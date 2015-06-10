@@ -51,7 +51,7 @@ namespace Scribble.Web
 
             builder.Register(c => c.Resolve<IDocumentStore>().OpenSession())
                 .As<IDocumentSession>()
-                .InstancePerHttpRequest();
+                .InstancePerRequest();
         }
     }
 }
