@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using Scribble.Web.ViewModels;
 
-namespace Scribble.Web.Controllers : BlogViewModel
+namespace Scribble.Web.ViewModels
 {
-    public class PostListViewModel
+    public class PostListViewModel : BlogViewModel
     {
         public string Title { get; set; }
         public IList<PostSummaryViewModel> Posts { get; set; }
