@@ -91,6 +91,7 @@
     <Compile Include="Controllers\PostControllerTest.cs" />
     <Compile Include="Helpers\LinkWrapperTest.cs" />
     <Compile Include="Helpers\OptionalLinkHelperTest.cs" />
+    <Compile Include="Repositories\BlogInfoRepositoryTest.cs" />
     <Compile Include="Repositories\PageRepositoryTest.cs" />
     <Compile Include="Repositories\PostRepositoryTest.cs" />
     <Compile Include="Entities\PostTest.cs" />
