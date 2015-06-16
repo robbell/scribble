@@ -5,6 +5,7 @@ using AutoMapper;
 using Raven.Client;
 using Raven.Client.Document;
 using Scribble.Web.Areas.Authoring.ViewModels;
+using Scribble.Web.Domain;
 using Scribble.Web.Entities;
 using Scribble.Web.Repositories;
 using Scribble.Web.ViewModels;
@@ -18,8 +19,10 @@ namespace Scribble.Web
             var builder = new ContainerBuilder();
 
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
+
             builder.RegisterType<PostRepository>().As<IPostRepository>();
             builder.RegisterType<PageRepository>().As<IPageRepository>();
+            builder.RegisterType<BlogInfoRepository>().As<IBlogInfoProvider>();
 
             RegisterRavenDb(builder);
             RegisterMapper(builder);
