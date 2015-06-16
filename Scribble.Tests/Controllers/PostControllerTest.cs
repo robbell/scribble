@@ -16,7 +16,13 @@ namespace Scribble.Tests.Controllers
         private PostController controller;
         private IPostRepository repository;
         private IMappingEngine mapper;
-        private readonly List<Post> sampleEntities = new List<Post> { new Post(), new Post() };
+
+        private readonly List<Post> sampleEntities = new List<Post>
+        {
+            new Post {Category = new Category {Name = "full", UrlName = "short"}},
+            new Post {Tags = new[] {new Tag {Name = "full", UrlName = "short"}}}
+        };
+
         private readonly List<PostSummaryViewModel> sampleSummaries = new List<PostSummaryViewModel> { new PostSummaryViewModel(), new PostSummaryViewModel() };
 
         [SetUp]
@@ -45,16 +51,18 @@ namespace Scribble.Tests.Controllers
         [Test]
         public void ByTagGetsPostsWithTagFromRepository()
         {
-            var expectedTag = new Tag();
+            var requestTag = new Tag { UrlName = "short" };
 
             Mock.Get(repository)
                 .Setup(r => r.ByTag(It.IsAny<Tag>()))
                 .Returns(sampleEntities);
 
-            var result = controller.ByTag(expectedTag).Model;
+            var result = controller.ByTag(requestTag).Model as PostListViewModel;
 
-            Mock.Get(repository).Verify(r => r.ByTag(expectedTag));
-            Assert.That(result, Is.EqualTo(sampleSummaries));
+            Mock.Get(repository).Verify(r => r.ByTag(requestTag));
+            Assert.IsNotNull(result);
+            Assert.That(result.Posts, Is.EqualTo(sampleSummaries));
+            Assert.That(result.Title, Is.EqualTo("Posts tagged with \"full\""));
         }
 
         [Test]

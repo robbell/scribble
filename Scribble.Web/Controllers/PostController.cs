@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
 using Scribble.Web.Entities;
@@ -23,21 +24,23 @@ namespace Scribble.Web.Controllers
         {
             var posts = repository.Recent();
 
-            return View(MapEntitiesToSummaries(posts));
+            return View(MapEntitiesToSummaries(posts, "Recent posts"));
         }
 
         public ViewResult ByTag(Tag tag)
         {
             var posts = repository.ByTag(tag);
 
-            return View(MapEntitiesToSummaries(posts));
+            var tagName = posts.First().Tags.First(t => t.UrlName == tag.UrlName).Name;
+
+            return View(MapEntitiesToSummaries(posts, string.Format("Posts tagged with \"{0}\"", tagName)));
         }
 
         public ViewResult ByCategory(Category category)
         {
             var posts = repository.ByCategory(category);
 
-            return View(MapEntitiesToSummaries(posts));
+            return View(MapEntitiesToSummaries(posts, posts.First().Category.Name));
         }
 
         public ActionResult Single(PostUrlViewModel postUrl)
@@ -71,9 +74,11 @@ namespace Scribble.Web.Controllers
             return RedirectToAction("Single");
         }
 
-        private IList<PostSummaryViewModel> MapEntitiesToSummaries(IList<Post> entities)
+        private PostListViewModel MapEntitiesToSummaries(IList<Post> entities, string title)
         {
-            return mapper.Map<IList<PostSummaryViewModel>>(entities);
+            var posts = mapper.Map<IList<PostSummaryViewModel>>(entities);
+
+            return new PostListViewModel { Posts = posts, Title = title };
         }
     }
 }

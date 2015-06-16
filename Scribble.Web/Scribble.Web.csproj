@@ -126,6 +126,7 @@
     <Compile Include="Attributes\BlogModelAttribute.cs" />
     <Compile Include="Controllers\PageController.cs" />
     <Compile Include="Controllers\PostController.cs" />
+    <Compile Include="ViewModels\PostListViewModel.cs" />
     <Compile Include="Repositories\BlogInfoRepository.cs" />
     <Compile Include="Domain\IBlogInfoProvider.cs" />
     <Compile Include="Entities\Page.cs" />
