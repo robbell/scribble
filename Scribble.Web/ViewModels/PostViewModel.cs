@@ -6,7 +6,7 @@ using Scribble.Web.Entities;
 
 namespace Scribble.Web.ViewModels
 {
-    public class PostViewModel
+    public class PostViewModel : BlogViewModel
     {
         public DateTime Date { get; set; }
 
