@@ -1,36 +1,40 @@
 ﻿@using Scribble.Web.Helpers
 @model Scribble.Web.ViewModels.PostViewModel
 
-    <h1>@Model.Title</h1>
+@section Title {
+    @Model.Title
+}
 
-    @Html.Raw(Model.Body)
+<h1>@Model.Title</h1>
 
-    <h2>Tags</h2>
+@Html.Raw(Model.Body)
 
-    <ul>
-        @foreach (var tag in Model.Tags)
-        {
-            <li>@Html.ActionLink(tag.Name, "ByTag", new { tag.UrlName })</li>
-        }
-    </ul>
+<h2>Tags</h2>
 
-    <h2>Category</h2>
-
-    <p>@Html.ActionLink(Model.Category.Name, "ByCategory", new { Model.Category.UrlName })</p>
-
-    <h2>Comments</h2>
-
-    @foreach (var comment in Model.Comments)
+<ul>
+    @foreach (var tag in Model.Tags)
     {
-        <div>
-            <h3>
-                @using (Html.WrapWithLink(comment.Website))
-                {
-                    @comment.Name
-                }
-            </h3>
-            <p>@comment.Text</p>
-        </div>
+        <li>@Html.ActionLink(tag.Name, "ByTag", new { tag.UrlName })</li>
     }
-    
+</ul>
+
+<h2>Category</h2>
+
+<p>@Html.ActionLink(Model.Category.Name, "ByCategory", new { Model.Category.UrlName })</p>
+
+<h2>Comments</h2>
+
+@foreach (var comment in Model.Comments)
+{
+    <div>
+        <h3>
+            @using (Html.WrapWithLink(comment.Website))
+            {
+                @comment.Name
+            }
+        </h3>
+        <p>@comment.Text</p>
+    </div>
+}
+
 @Html.Partial("AddComment", Model)

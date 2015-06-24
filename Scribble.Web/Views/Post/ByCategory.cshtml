@@ -1,5 +1,9 @@
 ﻿@model Scribble.Web.ViewModels.PostListViewModel
 
+@section Title {
+    @Model.Title
+}
+
 <h1>@Model.Title</h1>
 
 @foreach (var post in Model.Posts)

@@ -3,6 +3,14 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    @if (IsSectionDefined("Title"))
+    {
+        <title>@RenderSection("Title") - Site name</title>
+    }
+    else
+    {
+        <title>Site name</title>
+    }
 </head>
 <body>
     @RenderBody()

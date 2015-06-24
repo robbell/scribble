@@ -1,5 +1,9 @@
 ﻿@model Scribble.Web.ViewModels.PageViewModel
 
+@section Title {
+    @Model.Title
+}
+
 <article>
     @Html.Raw(Model.Body)
 </article>
