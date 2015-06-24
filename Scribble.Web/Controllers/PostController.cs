@@ -31,6 +31,7 @@ namespace Scribble.Web.Controllers
         {
             var posts = repository.ByTag(tag);
 
+            // ToDo: Update this hacky way to load tag full name
             var tagName = posts.First().Tags.First(t => t.UrlName == tag.UrlName).Name;
 
             return View(MapEntitiesToSummaries(posts, string.Format("Posts tagged with \"{0}\"", tagName)));

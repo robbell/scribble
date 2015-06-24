@@ -17,13 +17,16 @@ namespace Scribble.Tests.Controllers
         private IPostRepository repository;
         private IMappingEngine mapper;
 
+        private readonly List<PostSummaryViewModel> sampleSummaries = new List<PostSummaryViewModel> { new PostSummaryViewModel(), new PostSummaryViewModel() };
         private readonly List<Post> sampleEntities = new List<Post>
         {
-            new Post {Category = new Category {Name = "full", UrlName = "short"}},
-            new Post {Tags = new[] {new Tag {Name = "full", UrlName = "short"}}}
+            new Post
+            {
+                Category = new Category {Name = "CategoryFullName", UrlName = "CategoryUrlName"},
+                Tags = new[] {new Tag {Name = "TagFullName", UrlName = "TagUrlName"}}
+            },
+            new Post()
         };
-
-        private readonly List<PostSummaryViewModel> sampleSummaries = new List<PostSummaryViewModel> { new PostSummaryViewModel(), new PostSummaryViewModel() };
 
         [SetUp]
         public void SetUp()
@@ -42,16 +45,19 @@ namespace Scribble.Tests.Controllers
         {
             Mock.Get(repository).Setup(p => p.Recent()).Returns(sampleEntities);
 
-            var result = controller.Recent().Model;
+            var result = controller.Recent().Model as PostListViewModel;
 
             Mock.Get(repository).Verify(r => r.Recent());
-            Assert.That(result, Is.EqualTo(sampleSummaries));
+
+            Assert.IsNotNull(result);
+            Assert.That(result.Posts, Is.EqualTo(sampleSummaries));
+            Assert.That(result.Title, Is.EqualTo("Recent posts"));
         }
 
         [Test]
         public void ByTagGetsPostsWithTagFromRepository()
         {
-            var requestTag = new Tag { UrlName = "short" };
+            var requestTag = new Tag { UrlName = "TagUrlName" };
 
             Mock.Get(repository)
                 .Setup(r => r.ByTag(It.IsAny<Tag>()))
@@ -60,24 +66,28 @@ namespace Scribble.Tests.Controllers
             var result = controller.ByTag(requestTag).Model as PostListViewModel;
 
             Mock.Get(repository).Verify(r => r.ByTag(requestTag));
+
             Assert.IsNotNull(result);
             Assert.That(result.Posts, Is.EqualTo(sampleSummaries));
-            Assert.That(result.Title, Is.EqualTo("Posts tagged with \"full\""));
+            Assert.That(result.Title, Is.EqualTo("Posts tagged with \"TagFullName\""));
         }
 
         [Test]
         public void ByCategoryGetsPostsInCategoryFromRepository()
         {
-            var expectedCategory = new Category();
+            var expectedCategory = new Category { UrlName = "CategoryUrlName" };
 
             Mock.Get(repository)
                 .Setup(r => r.ByCategory(expectedCategory))
                 .Returns(sampleEntities);
 
-            var result = controller.ByCategory(expectedCategory).Model;
+            var result = controller.ByCategory(expectedCategory).Model as PostListViewModel;
 
             Mock.Get(repository).Verify(r => r.ByCategory(expectedCategory));
-            Assert.That(result, Is.EqualTo(sampleSummaries));
+
+            Assert.IsNotNull(result);
+            Assert.That(result.Posts, Is.EqualTo(sampleSummaries));
+            Assert.That(result.Title, Is.EqualTo("CategoryFullName"));
         }
 
         [Test]
