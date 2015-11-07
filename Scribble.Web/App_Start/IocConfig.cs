@@ -1,6 +1,8 @@
-﻿using System.Web.Mvc;
+﻿using System.Web.Http;
+using System.Web.Mvc;
 using Autofac;
 using Autofac.Integration.Mvc;
+using Autofac.Integration.WebApi;
 using AutoMapper;
 using Raven.Client;
 using Raven.Client.Document;
@@ -19,15 +21,20 @@ namespace Scribble.Web
             var builder = new ContainerBuilder();
 
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
+            builder.RegisterApiControllers(typeof (MvcApplication).Assembly);
 
             builder.RegisterType<PostRepository>().As<IPostRepository>();
             builder.RegisterType<PageRepository>().As<IPageRepository>();
+            builder.RegisterType<CommentRepository>().As<ICommentRepository>();
             builder.RegisterType<BlogInfoRepository>().As<IBlogInfoProvider>();
 
             RegisterRavenDb(builder);
             RegisterMapper(builder);
 
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(builder.Build()));
+            var container = builder.Build();
+
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+            GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
         }
 
         private static void RegisterMapper(ContainerBuilder builder)
