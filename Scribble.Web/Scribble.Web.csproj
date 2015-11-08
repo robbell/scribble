@@ -166,6 +166,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Global.asax" />
+    <Content Include="node_modules\angular\angular-csp.css" />
+    <Content Include="node_modules\angular\angular.js" />
+    <Content Include="node_modules\angular\angular.min.js" />
+    <Content Include="node_modules\angular\index.js" />
+    <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\controllers.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -188,6 +194,12 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Areas\Authoring\Views\Post\Create.cshtml" />
+    <Content Include="package.json" />
+    <Content Include="node_modules\angular\angular.min.js.gzip" />
+    <Content Include="node_modules\angular\angular.min.js.map" />
+    <Content Include="node_modules\angular\bower.json" />
+    <Content Include="node_modules\angular\package.json" />
+    <Content Include="node_modules\angular\README.md" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -197,6 +209,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Page\Single.cshtml" />
+    <Content Include="Views\Post\AddCommentJs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Authoring\Views\Shared\" />

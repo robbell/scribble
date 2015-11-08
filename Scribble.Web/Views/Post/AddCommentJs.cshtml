@@ -1,0 +1,16 @@
+﻿@model Scribble.Web.ViewModels.PostViewModel
+
+<div>
+    <div ng-controller="CommentCtrl">
+        <form name="commentForm" novalidate ng-submit="addComment(commentForm.$valid)">
+            
+            Name: <input type="text" ng-model="comment.name" required/><br/>
+            Email: <input type="email" ng-model="comment.email" required/><br/>
+            Website: <input type="url" ng-model="comment.website"/><br/>
+            Comment: <input type="text" ng-model="comment.text" required/><br/>
+
+            <input type="hidden" value="@Model.Title" ng-model="comment.postUrl"/> @* ToDo: Add post URL *@
+            <input type="submit" value="Submit"/>
+        </form>
+    </div>
+</div>

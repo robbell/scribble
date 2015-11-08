@@ -1,8 +1,12 @@
 ﻿<!DOCTYPE html>
 
-<html>
+<html ng-app="scribbleApp">
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width"/>
+    <script src="~/node_modules/angular/angular.js"></script>
+    <script src="~/Scripts/app.js"></script>
+    <script src="~/Scripts/controllers.js"></script>
+
     @if (IsSectionDefined("Title"))
     {
         <title>@RenderSection("Title") - Site name</title>
