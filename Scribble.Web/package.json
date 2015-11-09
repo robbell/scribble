@@ -6,6 +6,10 @@
   "devDependencies": {},
   "author": "Rob Bell",
   "license": "GPL-2.0",
+  "devDependencies": {
+    "karma": "~0.13",
+    "karma-jasmine": "~0.1"
+  },
   "dependencies": {
     "angular": "^1.4.7"
   }
